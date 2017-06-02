@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="muse"
+#ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -36,19 +37,18 @@ plugins=(rails2 git ruby bundler osx fu)
 #bindkey '\e[3~' delete-char
 #bindkey '^R' history-incremental-search-backward
 
-export FUCHS_DEV=$HOME/Sites/fuchs
+# export FUCHS_DEV=$HOME/Sites/fuchs
 # Customize to your needs...
-export PATH=/usr/local/heroku/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bib:/usr/local/sbin
-
+export PATH="./bin:/Users/aharder/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/opt/oracle/instantclient_11_2:/usr/local/bin:/opt/X11/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:$PATH"
 # Initialise rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+#if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Oracle Development: ruby-oci8
-export DYLD_LIBRARY_PATH=/opt/oracle/instantclient_11_2
 export NLS_LANG=GERMAN_GERMANY.UTF8
 export NLS_COMP=LINGUISTIC
 export NLS_SORT=BINARY_CI
 source $ZSH/oh-my-zsh.sh
+export OCI_DIR=/opt/oracle/instantclient_11_2
 
 VIM_EDITOR_NORC='vim -u NORC'
 EDITOR="$HOME/.std_editor"; export EDITOR
@@ -70,3 +70,33 @@ mvim_fc() {
 rslv_fc() {
   git add $(git status | grep 'both modified' |cut -d: -f2 | head -1)
 }
+
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+
+# Fix numeric keypad
+# 0 . Enter
+bindkey -s "^[Op" "0"
+bindkey -s "^[On" "."
+bindkey -s "^[OM" "^M"
+# 1 2 3
+bindkey -s "^[Oq" "1"
+bindkey -s "^[Or" "2"
+bindkey -s "^[Os" "3"
+# 4 5 6
+bindkey -s "^[Ot" "4"
+bindkey -s "^[Ou" "5"
+bindkey -s "^[Ov" "6"
+# 7 8 9
+bindkey -s "^[Ow" "7"
+bindkey -s "^[Ox" "8"
+bindkey -s "^[Oy" "9"
+# + -  * /
+bindkey -s "^[Ol" "+"
+bindkey -s "^[Om" "-"
+bindkey -s "^[Oj" "*"
+bindkey -s "^[Oo" "/"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+export PATH="/usr/local/opt/libxml2/bin:$PATH"
